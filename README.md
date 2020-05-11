@@ -68,8 +68,8 @@ Settings options
 | Option              | Type                                   | Default | Required |
 | ------------------- | -------------------------------------- | ------- | -------- |
 | despawnTime         | `number`                               | 2400    | false    |
-| verticalDirection   | `top | bottom`                         | top     | false    |
-| horizontalDirection | `left | right`                         | right   | false    |
+| verticalDirection   | `top` , `bottom`                       | top     | false    |
+| horizontalDirection | `left` , `right`                       | right   | false    |
 | customNotification  | `React.FC<NotificationStackInterface>` | null    | false    |
 
 The default design of the notifications might not suit your app. Here's an example of making a custom one!
@@ -108,12 +108,12 @@ const { spawn, despawn, notifications } = useNotification();
 
 #### spawn
 
-| Option   | Type                                | Default   | Required |
-| -------- | ----------------------------------- | --------- | -------- |
-| id       | `string`                            | 2400      | false    |
-| title    | `string`                            |           | true     |
-| subtitle | `string`                            | undefined | false    |
-| variant  | `info | success | warning | danger` | info      | false    |
+| Option   | Type                                           | Default   | Required |
+| -------- | ---------------------------------------------- | --------- | -------- |
+| id       | `string`                                       | 2400      | false    |
+| title    | `string`                                       |           | true     |
+| subtitle | `string`                                       | undefined | false    |
+| variant  | `info`, `success`, `warning`, `danger`, `info` | false     |
 
 #### despawn
 
