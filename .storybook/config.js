@@ -17,9 +17,7 @@ const CustomNotification = (notification) => {
 */
 
 const settings = {
-  despawnTime: 1000,
-  verticalDirection: "top",
-  horizontalDirection: "left",
+  despawnTime: 3000,
 };
 
 const withWrapper = (cb) => (

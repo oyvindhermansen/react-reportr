@@ -1,4 +1,19 @@
 import useNotifications from "./useNotification";
-import { NotificationProvider } from "./NotificationContext";
+import {
+  NotificationProvider,
+  NotificationContextInterface,
+  NotificationStackInterface,
+  NotificationVariant,
+  HorizontalDirectionType,
+  VerticalDirectionType,
+} from "./NotificationContext";
 
-export { useNotifications, NotificationProvider };
+export {
+  useNotifications,
+  NotificationProvider,
+  NotificationContextInterface,
+  NotificationStackInterface,
+  NotificationVariant,
+  HorizontalDirectionType,
+  VerticalDirectionType,
+};
