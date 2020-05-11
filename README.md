@@ -76,11 +76,13 @@ The default design of the notifications might not suit your app. Here's an examp
 
 ```tsx
 const MyCustomNotifcation: React.FC<NotificationStackInterface> = ({
-  notification,
+  title,
+  subtitle,
 }) => {
   return (
     <div>
-      <h2>{notification.title} 👋</h2>
+      <h2>{title} 👋</h2>
+      <small>{subtitle}</small>
     </div>
   );
 };

@@ -1,8 +1,4 @@
-import * as React from "react";
-import { storiesOf } from "@storybook/react";
-import useNotification from "../lib/useNotification";
-
-function randomizeContent(): any {
+export default function randomizeNotification(): any {
   const selections = [
     {
       title: "Info",
@@ -30,19 +26,3 @@ function randomizeContent(): any {
 
   return selections[randomIndex];
 }
-
-export const NotificationStory = () => {
-  const { spawn } = useNotification();
-
-  return (
-    <div>
-      <button onClick={() => spawn(randomizeContent())}>
-        Spawn notification
-      </button>
-    </div>
-  );
-};
-
-storiesOf("Component/Notification", module).add("Basic usage", () => (
-  <NotificationStory />
-));

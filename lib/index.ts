@@ -1,4 +1,4 @@
-import useNotifications from "./useNotification";
+import useNotification from "./useNotification";
 import {
   NotificationProvider,
   NotificationContextInterface,
@@ -9,7 +9,7 @@ import {
 } from "./NotificationContext";
 
 export {
-  useNotifications,
+  useNotification,
   NotificationProvider,
   NotificationContextInterface,
   NotificationStackInterface,
