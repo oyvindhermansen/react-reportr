@@ -67,26 +67,17 @@ const NotificationProvider: React.FC<ProviderProps> = ({
 
   const spawn = React.useCallback(
     (opts: SpawnOpts) => {
+      const newNotification = {
+        id: opts.id || uuid.v4(),
+        title: opts.title,
+        subtitle: opts.subtitle,
+        variant: opts.variant || "info",
+      };
+
       if (settings && settings.verticalDirection === "bottom") {
-        setNotifications([
-          ...notifications,
-          {
-            id: opts.id || uuid.v4(),
-            title: opts.title,
-            subtitle: opts.subtitle,
-            variant: opts.variant || "info",
-          },
-        ]);
+        setNotifications([...notifications, newNotification]);
       } else {
-        setNotifications([
-          {
-            id: opts.id || uuid.v4(),
-            title: opts.title,
-            subtitle: opts.subtitle,
-            variant: opts.variant || "info",
-          },
-          ...notifications,
-        ]);
+        setNotifications([newNotification, ...notifications]);
       }
     },
     [notifications]
