@@ -113,7 +113,7 @@ const { spawn, despawn, notifications } = useNotification();
 | id       | `string`                                       | 2400      | false    |
 | title    | `string`                                       |           | true     |
 | subtitle | `string`                                       | undefined | false    |
-| variant  | `info`, `success`, `warning`, `danger`, `info` | false     |
+| variant  | `info`, `success`, `warning`, `danger`, `info` | info      | false    |
 
 #### despawn
 
