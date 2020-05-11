@@ -1,4 +1,4 @@
-# Notification handler for react
+# React Reportr
 
 Easiest notification spawner of all time, highly customizable!
 
@@ -7,4 +7,5 @@ Easiest notification spawner of all time, highly customizable!
 ## Usage
 
 ## API
+
 # react-reportr
