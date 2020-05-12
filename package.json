@@ -1,6 +1,6 @@
 {
   "name": "@oyvindher/react-reportr",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "dist/index.js",
   "files": [
     "dist"
@@ -10,6 +10,7 @@
     "dev": "tsc --watch --incremental",
     "storybook": "start-storybook -p 9005",
     "build-storybook": "build-storybook -o .out",
+    "build:publish": "yarn build && yarn publish",
     "test": "jest"
   },
   "jest": {
