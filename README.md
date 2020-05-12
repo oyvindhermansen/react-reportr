@@ -68,9 +68,11 @@ Settings options
 | Option              | Type                                   | Default | Required |
 | ------------------- | -------------------------------------- | ------- | -------- |
 | despawnTime         | `number`                               | 2400    | false    |
-| verticalDirection   | `top` , `bottom`                       | top     | false    |
-| horizontalDirection | `left` , `right`                       | right   | false    |
+| verticalDirection   | `top`, `bottom`                        | top     | false    |
+| horizontalDirection | `left`, `right`                        | right   | false    |
 | customNotification  | `React.FC<NotificationStackInterface>` | null    | false    |
+
+---
 
 The default design of the notifications might not suit your app. Here's an example of making a custom one!
 
