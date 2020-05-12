@@ -78,8 +78,11 @@ The default design of the notifications might not suit your app. Here's an examp
 
 ```tsx
 const MyCustomNotifcation: React.FC<NotificationStackInterface> = ({
+  id,
   title,
   subtitle,
+  variant,
+  despawning, // used for animations on unmounting
 }) => {
   return (
     <div>
