@@ -7,10 +7,11 @@ import {
   NotificationProvider,
   useNotification,
   NotificationStackInterface,
+  NotificationVariant,
 } from "../../lib";
-import { useTransition, animated } from 'react-spring';
+import { useTransition, animated } from "react-spring";
 
-const StyledCustom = styled(animated.div) <any>`
+const StyledCustom = styled(animated.div)<{ variant?: NotificationVariant }>`
   box-sizing: border-box;
   background-color: #fff;
   min-width: 200px;
@@ -59,30 +60,29 @@ const CustomNotificationComponent: React.FC<NotificationStackInterface> = ({
   subtitle,
   despawning,
 }) => {
-
   /**
    For more info on react-spring transitions, see:
    https://www.react-spring.io/docs/hooks/use-transition
    */
 
   const transitions = useTransition(!despawning, null, {
-    from: { transform: 'translate3d(0,-100px,0)', opacity: 0.2 },
-    enter: { transform: 'translate3d(0,0px,0)', opacity: 1 },
-    leave: { transform: 'translate3d(0,-100px,0)', opacity: 0 },
+    from: { transform: "translate3d(0,-100px,0)", opacity: 0.2 },
+    enter: { transform: "translate3d(0,0px,0)", opacity: 1 },
+    leave: { transform: "translate3d(0,-100px,0)", opacity: 0 },
   });
 
   return (
     <>
-      {
-        transitions.map(({ item, key, props }) => {
-          return item && (
+      {transitions.map(({ item, key, props }) => {
+        return (
+          item && (
             <StyledCustom style={props} key={key} variant={variant}>
               <p>👋 {title}</p>
               {subtitle && <small>{subtitle}</small>}
             </StyledCustom>
           )
-        })
-      }
+        );
+      })}
     </>
   );
 };
@@ -103,12 +103,19 @@ export const NotificationStory = () => {
 
 const App: React.FC = ({ children }) => {
   return (
-    <NotificationProvider settings={{ customNotification: CustomNotificationComponent }}>{children}</NotificationProvider>
+    <NotificationProvider
+      settings={{ customNotification: CustomNotificationComponent }}
+    >
+      {children}
+    </NotificationProvider>
   );
 };
 
-storiesOf("Component/Notification", module).add("WithReactSpringTransitions", () => (
-  <App>
-    <NotificationStory />
-  </App>
-));
+storiesOf("Component/Notification", module).add(
+  "WithReactSpringTransitions",
+  () => (
+    <App>
+      <NotificationStory />
+    </App>
+  )
+);
