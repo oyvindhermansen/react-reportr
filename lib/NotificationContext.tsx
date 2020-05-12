@@ -16,7 +16,7 @@ export interface NotificationStackInterface {
   title: string;
   subtitle?: string;
   variant?: NotificationVariant;
-  fadeOut?: boolean;
+  despawning?: boolean;
 }
 
 export interface NotificationContextInterface {
@@ -65,7 +65,7 @@ const NotificationProvider: React.FC<ProviderProps> = ({
       setNotifications(
         internalNotifications.current.map((n) => {
           if (n.id === id) {
-            n.fadeOut = true;
+            n.despawning = true;
           }
 
           return n;
@@ -87,7 +87,7 @@ const NotificationProvider: React.FC<ProviderProps> = ({
         title: opts.title,
         subtitle: opts.subtitle,
         variant: opts.variant || "info",
-        fadeOut: false,
+        despawning: false,
       };
 
       if (settings && settings.verticalDirection === "bottom") {
@@ -109,7 +109,7 @@ const NotificationProvider: React.FC<ProviderProps> = ({
     setNotifications(
       notifications.map((n) => {
         if (n.id === id) {
-          n.fadeOut = true;
+          n.despawning = true;
         }
 
         return n;

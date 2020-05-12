@@ -132,7 +132,7 @@ const NotificationManager: React.FC<Props> = ({
             variant={notification.variant}
             key={notification.id}
             horizontalDirection={horizontalDirection}
-            despawn={notification.fadeOut}
+            despawn={notification.despawning}
           >
             <NotificationTitle>{notification.title}</NotificationTitle>
             {notification.subtitle && (
