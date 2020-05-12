@@ -6,7 +6,11 @@ import {
   VerticalDirectionType,
   HorizontalDirectionType,
 } from "./NotificationContext";
-import { FADE_IN_RIGHT, FADE_IN_LEFT } from "./util/animations";
+import {
+  FADE_IN_RIGHT,
+  FADE_IN_LEFT,
+  FADE_OUT_BOTTOM,
+} from "./util/animations";
 
 const NotificationWrapper = styled.div<{
   verticalDirection?: VerticalDirectionType;
@@ -38,6 +42,7 @@ const NotificationWrapper = styled.div<{
 const StyledNotification = styled.div<{
   variant?: NotificationVariant;
   horizontalDirection?: HorizontalDirectionType;
+  despawn?: boolean;
 }>`
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
   background: #fff;
@@ -55,6 +60,12 @@ const StyledNotification = styled.div<{
     props.horizontalDirection === "left" &&
     css`
       animation: ${FADE_IN_LEFT} 0.24s 0.24s ease-out both;
+    `};
+
+  ${(props) =>
+    props.despawn &&
+    css`
+      animation: ${FADE_OUT_BOTTOM} 0.12s ease-out both;
     `};
 
   &:not(:last-child) {
@@ -111,6 +122,7 @@ const NotificationManager: React.FC<Props> = ({
       horizontalDirection={horizontalDirection}
     >
       {notifications.map((notification) => {
+        console.log(notification);
         if (CustomNotification) {
           return <CustomNotification {...notification} />;
         }
@@ -120,6 +132,7 @@ const NotificationManager: React.FC<Props> = ({
             variant={notification.variant}
             key={notification.id}
             horizontalDirection={horizontalDirection}
+            despawn={notification.fadeOut}
           >
             <NotificationTitle>{notification.title}</NotificationTitle>
             {notification.subtitle && (

@@ -16,6 +16,7 @@ export interface NotificationStackInterface {
   title: string;
   subtitle?: string;
   variant?: NotificationVariant;
+  fadeOut?: boolean;
 }
 
 export interface NotificationContextInterface {
@@ -52,26 +53,41 @@ const NotificationProvider: React.FC<ProviderProps> = ({
     NotificationStackInterface[]
   >([]);
 
-  const activeNotificationIds = notifications.map((n) => n.id).join(",");
+  const internalNotifications = React.useRef(notifications);
+  internalNotifications.current = notifications;
 
-  React.useEffect(() => {
-    if (activeNotificationIds.length > 0) {
-      const timer = setTimeout(() => {
-        setNotifications(notifications.slice(0, notifications.length - 1));
-      }, (settings && settings.despawnTime) || 2400);
-      return () => clearTimeout(timer);
-    }
+  const deswpawnerFn = React.useCallback((id: string) => {
+    setNotifications(internalNotifications.current.filter((n) => n.id !== id));
+  }, []);
 
-    return () => {};
-  }, [activeNotificationIds, notifications]);
+  const queueDespawn = React.useCallback(
+    (id: string) => {
+      setNotifications(
+        internalNotifications.current.map((n) => {
+          if (n.id === id) {
+            n.fadeOut = true;
+          }
+
+          return n;
+        })
+      );
+
+      window.setTimeout(() => {
+        deswpawnerFn(id);
+      }, 240);
+    },
+    [deswpawnerFn]
+  );
 
   const spawn = React.useCallback(
     (opts: SpawnOpts) => {
+      const id = opts.id || uuid.v4();
       const newNotification = {
-        id: opts.id || uuid.v4(),
+        id,
         title: opts.title,
         subtitle: opts.subtitle,
         variant: opts.variant || "info",
+        fadeOut: false,
       };
 
       if (settings && settings.verticalDirection === "bottom") {
@@ -79,16 +95,31 @@ const NotificationProvider: React.FC<ProviderProps> = ({
       } else {
         setNotifications([newNotification, ...notifications]);
       }
+
+      if (!opts.id) {
+        window.setTimeout(() => {
+          queueDespawn(id);
+        }, (settings && settings.despawnTime) || 2400);
+      }
     },
     [notifications]
   );
 
-  const despawn = React.useCallback(
-    (id: string) => {
-      setNotifications(notifications.filter((n) => n.id !== id));
-    },
-    [notifications]
-  );
+  function despawn(id: string) {
+    setNotifications(
+      notifications.map((n) => {
+        if (n.id === id) {
+          n.fadeOut = true;
+        }
+
+        return n;
+      })
+    );
+
+    window.setTimeout(() => {
+      deswpawnerFn(id);
+    }, 240);
+  }
 
   const providerValue = React.useMemo(() => {
     return {
