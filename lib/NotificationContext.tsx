@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as uuid from "uuid";
+import uid from "./util/uid";
 import NotificationManager from "./NotificationManager";
 
 export type NotificationVariant = "info" | "success" | "warning" | "danger";
@@ -81,7 +81,7 @@ const NotificationProvider: React.FC<ProviderProps> = ({
 
   const spawn = React.useCallback(
     (opts: SpawnOpts) => {
-      const id = opts.id || uuid.v4();
+      const id = opts.id || uid();
       const newNotification = {
         id,
         title: opts.title,
