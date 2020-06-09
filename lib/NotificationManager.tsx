@@ -122,7 +122,6 @@ const NotificationManager: React.FC<Props> = ({
       horizontalDirection={horizontalDirection}
     >
       {notifications.map((notification) => {
-        console.log(notification);
         if (CustomNotification) {
           return <CustomNotification {...notification} />;
         }
